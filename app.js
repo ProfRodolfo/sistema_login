@@ -42,5 +42,59 @@ app.get('/', (req,res) =>{
 
 })
 
+app.get('/views/registro', (req,res) =>{
+    res.redirect('../')
+})
+
+app.get('/views/home', (req, res) =>{
+    // verifica se existe seção ativa
+    if (req.session.user){
+        let con = conectiondb();
+        let query2 = 'SELECT * FROM users WHERE email LIKE ?';
+        con.query(query2, [req.session.user],   
+        function (err, results){
+            res.render('views/home', {message: results})
+        })
+    }else{
+        res.redirect("/")
+    }
+})
+
+app.get('/views/login', (req, res) => {
+    let message = '';
+    res.render('views/login', {message: message})
+})
+
+//método post do register
+app.post('/register', function (req, res){
+
+    var username = req.body.nome;
+    var pass = req.body.pwd;
+    var email = req.body.email;
+    var idade = req.body.idade;
+
+    var con = conectiondb();
+
+    var queryConsulta = 'SELECT * FROM users WHERE email LIKE ?';
+
+    con.query(queryConsulta, [email], function (err, results){
+        if (results.length > 0){            
+            var message = 'E-mail já cadastrado';
+            res.render('views/registro', { message: message });
+        }else{
+            var query = 'INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?)';
+
+            con.query(query, [username, email, idade, pass], function (err, results){
+                if (err){
+                    throw err;
+                }else{
+                    console.log ("Usuario adicionado com email " + email);
+                    var message = "ok";
+                    res.render('views/registro', { message: message });
+                }        
+            });
+        }
+    });
+});
 
 app.listen(8081, () => console.log(`App listening on port!`));
