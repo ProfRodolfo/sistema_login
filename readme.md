@@ -44,7 +44,7 @@ CREATE TABLE users(
 5. Abra um pull request neste repositório.
 
 ## Suporte
-Se você tiver alguma dúvida ou sugestão para melhorar este projeto educacional, sinta-se à vontade para entrar em contato conosco enviando um e-mail para rodolfo.gsilva2@senacsp.edu.br
+Se você tiver alguma dúvida ou sugestão para melhorar este projeto educacional, sinta-se à vontade para entrar em contato conosco.
 
 ---
 Este projeto é destinado apenas para fins educacionais e não está disponível para venda. Espero que este projeto ajude no aprendizado em sistema de login. Sinta-se à vontade para personalizar e adaptar este projeto para suas necessidades educacionais.
